@@ -27,7 +27,7 @@ def home():
     for i in range(0,num_choose):
         # determine unit
         el = random.choice(items)
-        unit = random.choice(['g', 'kg', 'unit', 'teaspoons'])
+        unit = random.choice(['g', 'kg', 'units', 'teaspoons'])
         amount = random.randint(1, 20)
         if (el.endswith(('ose','ium'))):
             unit = 'moles'
@@ -37,7 +37,7 @@ def home():
     # generate steps
     steps = []
     choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam', 'Cut', 'Dice', 'Mix']
-    timed_choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam']
+    timed_choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam', 'Mix']
     for item in chosen:
         action = random.choice(choices)
         time = 0
@@ -45,6 +45,16 @@ def home():
             time = random.randint(5, 10)
 
         steps.append((action, item[0], item[1], item[2], time))
+
+    # generate steps text
+    steps_text = []
+    for i,step in enumerate(steps):
+        text = step[0] + " the " + step[1]
+        if step[4] > 0:
+            text += " for " + str(step[4]) + " minutes"
+
+        text += "."
+        steps_text.append((i+1, text))
 
     # set image
     image_paths = glob.glob("images/*.jpg")
@@ -65,7 +75,7 @@ def home():
 
     title = random.choice([style1, style2, style3])
 
-    return render_template('index.html', items = chosen, steps = steps, image = image, title = title)
+    return render_template('index.html', items = chosen, steps_text = steps_text, image = image, title = title)
 
 if __name__ == "__main__":
     app.run(debug=True)
