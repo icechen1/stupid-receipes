@@ -27,6 +27,7 @@ def home():
     for i in range(0,num_choose):
         # determine unit
         el = random.choice(items)
+
         unit = random.choice(['g', 'kg', 'unit', 'teaspoons'])
         amount = random.randint(1, 20)
         if (el.endswith(('ose','ium'))):
