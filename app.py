@@ -48,9 +48,24 @@ def home():
 
     # set image
     image_paths = glob.glob("images/*.jpg")
-    image = Markup('<div class="image" style="background-size: cover; background-position: center; background-image: url(' + random.choice(image_paths) + ');"></div>')
+    # windows fix
+    chosen_path = random.choice(image_paths)
+    chosen_path = chosen_path.replace('\\', '/')
+    image = Markup('<div class="image" style="background-size: cover; background-position: center; background-image: url(' + chosen_path + ');"></div>')
 
-    return render_template('index.html', items = chosen, steps = steps, image = image)
+    # title
+    main = chosen[0][0]
+    style1 = main.title()
+    if len(chosen) > 1:
+        side = chosen[1][0]
+        style1 = main.title() + " with " + side
+
+    style2 = main.title() + " royale"
+    style3 = steps[0][0].title() + "ed " + main.title()
+
+    title = random.choice([style1, style2, style3])
+
+    return render_template('index.html', items = chosen, steps = steps, image = image, title = title)
 
 if __name__ == "__main__":
     app.run(debug=True)
