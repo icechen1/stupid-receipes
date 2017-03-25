@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, Markup
 from recipes import load_recipes
 import random
+import glob
 
 app = Flask(__name__)
 
@@ -18,13 +19,13 @@ def home():
     items = list(load_recipes.load())
     chosen = []
     num_choose = random.randint(5, 10)
-    
+
     # why not
     if(random.randint(0,10) == 1):
         num_choose = 1
 
     for i in range(0,num_choose):
-        # determine unit 
+        # determine unit
         el = random.choice(items)
         unit = random.choice(['g', 'kg', 'unit', 'teaspoons'])
         amount = random.randint(1, 20)
@@ -32,7 +33,7 @@ def home():
             unit = 'moles'
 
         chosen.append((el, amount,unit))
-    
+
     # generate steps
     steps = []
     choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam', 'Cut', 'Dice', 'Mix']
@@ -45,7 +46,11 @@ def home():
 
         steps.append((action, item[0], item[1], item[2], time))
 
-    return render_template('index.html', items = chosen, steps = steps)
+    # set image
+    image_paths = glob.glob("images/*.jpg")
+    image = Markup('<div class="image" style="background-size: cover; background-position: center; background-image: url(' + random.choice(image_paths) + ');"></div>')
+
+    return render_template('index.html', items = chosen, steps = steps, image = image)
 
 if __name__ == "__main__":
     app.run(debug=True)
