@@ -35,10 +35,12 @@ def home():
     
     # generate steps
     steps = []
+    choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam', 'Cut', 'Dice', 'Mix']
+    timed_choices = ['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam']
     for item in chosen:
-        action = random.choice(['Burn', 'Bake', 'Deep-fry', 'Fry', 'Stir-fry', 'Steam', 'Cut', 'Dice', 'Mix'])
+        action = random.choice(choices)
         time = 0
-        if (action in ['Bake', 'Steam']):
+        if (action in timed_choices):
             time = random.randint(5, 10)
 
         steps.append((action, item[0], item[1], item[2], time))
