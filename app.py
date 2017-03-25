@@ -66,14 +66,22 @@ def home():
     # title
     main = chosen[0][0]
     style1 = main.title()
+    style4 = main.title()
     if len(chosen) > 1:
         side = chosen[1][0]
         style1 = main.title() + " with " + side
+        style4 = main.title() + " with " + side + " mix"
 
     style2 = main.title() + " royale"
     style3 = steps[0][0].title() + "ed " + main.title()
 
-    title = random.choice([style1, style2, style3])
+    countries = ["Chinese", "Canadian", "American", "French", "African"]
+    country = random.choice(countries)
+
+    style5 = country + " " + main.title()
+    style6 = country + " " + main.title() + " Fusion"
+
+    title = random.choice([style1, style2, style3, style4, style5, style6])
 
     return render_template('index.html', items = chosen, steps_text = steps_text, image = image, title = title)
 
