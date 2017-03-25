@@ -32,7 +32,8 @@ def home():
         if (el.endswith(('ose','ium'))):
             unit = 'moles'
 
-        chosen.append((el, amount,unit))
+        chosen.append((el, amount, unit))
+    chosen.append(('Sriracha', 1, 'teaspoon'))
 
     # generate steps
     steps = []
@@ -55,6 +56,8 @@ def home():
 
         text += "."
         steps_text.append((i+1, text))
+
+    steps_text.append((len(steps_text)+1, 'Dump everything in a bowl and serve.'))
 
     # set image
     image_paths = glob.glob("images/*.jpg")

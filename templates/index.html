@@ -27,12 +27,12 @@
 							</ul> -->
 							<h3>Required Ingredients:</h3>
 							{% for ingredient in items %}
-								<div class=flash>{{ ingredient[1] }} {{ ingredient[2] }} of {{ ingredient[0] }}</div>
+								<div class=flash><b>{{ ingredient[1] }} {{ ingredient[2] }}</b> of {{ ingredient[0] }}</div>
 							{% endfor %}
 							<br>
 							<h3>Instructions:</h3>
 							{% for step in steps_text %}
-								<div class=flash>{{ step[0] }}. {{ step[1] }}</div>
+								<div class=flash><b>{{ step[0] }}.</b> {{ step[1] }}</div>
 							{% endfor %}
 						</div>
 						{{ image }}
