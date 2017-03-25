@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Fooood</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+  <h1>Fooood</h1>
+  <div class=metanav>
+  {% for ingredient in items %}
+    <div class=flash>{{ ingredient }}</div>
+  {% endfor %}
+  {% for step in steps %}
+    <div class=flash>{{ step }}</div>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>
