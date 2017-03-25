@@ -1,8 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_from_directory
 from recipes import load_recipes
 import random
 
 app = Flask(__name__)
+
+@app.route('/assets/<path:path>')
+def send_assets(path):
+    return send_from_directory('assets', path)
+
+@app.route('/images/<path:path>')
+def send_images(path):
+    return send_from_directory('images', path)
 
 @app.route("/")
 def home():
@@ -35,7 +43,7 @@ def home():
 
         steps.append((action, item[0], item[1], item[2], time))
 
-    return render_template('ingredient.html', items = chosen, steps = steps)
+    return render_template('index.html', items = chosen, steps = steps)
 
 if __name__ == "__main__":
     app.run(debug=True)
